@@ -1,6 +1,6 @@
 # User Case Memory Schema
 
-Use this schema when implementing the open-source runtime for each user.
+Use this schema when implementing structured memory or case persistence for a user.
 
 ## 1. User profile
 
@@ -8,11 +8,13 @@ Use this schema when implementing the open-source runtime for each user.
 - name
 - city
 - language_strength
+- preferred_response_style
 - current_role
 - weekly_time_capacity
 - budget_band
 - device_access
 - work_pattern
+- faith_context_optional
 
 ## 2. Strategic profile
 
@@ -29,6 +31,7 @@ For each active case, store:
 - case_id
 - title
 - domain
+- linked_case_ids
 - current_stage
 - summary
 - current_bottleneck
@@ -51,7 +54,7 @@ For each active case, store:
 - decision
 - why
 - confidence
-- next review point
+- next_review_point
 
 ## 6. Follow-up state
 
@@ -64,7 +67,19 @@ For each active case, store:
 - last_review_at
 - inactive_for_duration
 
-## 7. Memory metadata
+## 7. History
+
+- prior_plans
+- prior_priorities
+- superseded_facts
+- archived_cases
+
+## 8. Storage defaults
+
+- local_private_storage_preferred
+- exportable_case_files_optional
+
+## 9. Memory metadata
 
 - created_at
 - updated_at
