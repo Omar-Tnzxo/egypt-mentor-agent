@@ -2,6 +2,8 @@
 
 # Egypt Mentor Agent
 
+[**English**](README.md) | [**Arabic**](README.ar.md)
+
 **Open-source prompts, skills, and evaluation assets for building a mentor-style AI agent focused on Egyptian users.**
 
 ![License](https://img.shields.io/badge/License-MIT-16a34a?style=for-the-badge)
