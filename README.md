@@ -1,153 +1,194 @@
-# Egypt Opportunity Agent
+# Egypt Mentor Agent
 
-A flexible markdown-based mentor agent for Egyptian users.
+Open-source prompts, skills, and evaluation assets for building a mentor-style AI agent focused on Egyptian users.
 
-Status: early open-source prompt pack for a mentor-style decision and execution agent.
+This project is designed for builders who want something more disciplined than a generic advice bot:
 
-This repository is an open-source prompt pack built around:
+- better diagnosis before planning
+- one real priority instead of many
+- plans sized for real life constraints
+- honest follow-up after weak execution
+- Egypt-first market and life-context awareness
 
-- one bootstrap file to mention at the start of a conversation
-- one main system prompt
-- modular skills
-- governance guardrails
-- market context files
-- architecture references for builders
-- contribution guidance for open-source collaborators
+## What This Is
 
-## What This Repo Solves
+`egypt-mentor-agent` is a host-agnostic prompt pack for a long-term mentor-style agent.
 
-This project is meant to help an agent answer questions like:
+It is meant to help an AI system answer questions like:
 
-- What should this person focus on now?
-- What is the real bottleneck?
-- What should they do next in their actual life constraints?
-- How should the agent follow up after weak execution or changing evidence?
+- What should this user focus on now?
+- What is the actual bottleneck?
+- What should happen next given time, money, and life constraints?
+- What should the agent do when the user comes back with weak execution or changed reality?
 
-It is designed for users in Egypt first, and for builders who want a reusable mentoring system rather than a generic advice bot.
+The repo is structured so the same mentoring logic can be reused across:
 
-## Primary entrypoint
+- file-aware chat tools
+- editor agents
+- custom GPT-style environments
+- local AI wrappers
+- future runtime integrations
+
+## What Makes It Different
+
+This project is opinionated.
+
+The agent is expected to:
+
+- ask one meaningful question at a time
+- avoid low-value or repetitive questions
+- build a case map before giving a serious plan
+- choose one main priority by default
+- protect the user from drift
+- separate practical problems from human-side problems
+- use evidence and reality to settle disagreements
+- maintain continuity when the host supports memory
+
+It is explicitly not meant to be:
+
+- a motivation bot
+- a generic life-coach template
+- a "10 ideas" machine
+- a substitute for licensed medical, legal, or financial professionals
+
+## Repository Contents
 
 - `START-HERE.md`
+  Bootstrap entrypoint for hosts that support file loading or mentions.
+- `prompts/system.md`
+  Core system behavior and mentoring rules.
+- `prompts/response-contract.md`
+  Internal quality contract for strong responses.
+- `skills/core/`
+  Reusable cross-domain decision and execution skills.
+- `skills/domains/`
+  Egypt-aware domain lenses such as real estate, fintech, ecommerce, and more.
+- `governance/`
+  Safety, memory, review, and long-term quality controls.
+- `manifests/`
+  Load order and host capability references.
+- `examples/`
+  Realistic worked cases that show intended behavior.
+- `evaluations/`
+  Checklists, scoring rubrics, and dry runs for quality control.
+- `architecture/`
+  Builder-facing structural references.
+- `CONTRIBUTING.md`
+  Rules for extending the repo without breaking its philosophy.
 
-This is the bootstrap file.
-It points the agent to the rest of the repository and the intended load order.
+## Quick Start
 
-## Quick start
+If your host supports file mentions or file loading:
 
-If you are using the repo:
+1. Start from `START-HERE.md`
+2. Follow `manifests/load-order.md`
+3. Load only the domain files that match the current case
 
-1. If your host supports file mentions, start from `START-HERE.md`
-2. If file mentions are unavailable, load `START-HERE.md` manually into the host context
-3. Follow `manifests/load-order.md`
-4. Use `examples/` to understand intended behavior
-5. Use `evaluations/` to judge response quality
+If your host does not support file mentions:
 
-If you are contributing to the repo:
+1. Manually load `START-HERE.md` into the host context
+2. Then follow `manifests/load-order.md`
+3. Keep the same structure and behavior rules
 
-1. Read `CONTRIBUTING.md`
-2. Change the smallest relevant file set
-3. Add or update an example or evaluation when the change is meaningful
-
-## What Is Included
-
-This repo includes:
-
-- a bootstrap entrypoint
-- a system prompt
-- a response contract
-- modular skills
-- governance rules
-- realistic examples
-- evaluation rubrics and dry runs
-
-## What Is Not Included
-
-This repo does not currently include:
-
-- a bundled runtime
-- a UI
-- a database or memory backend
-- a hosted service
-- a provider-specific integration layer
-
-It is intentionally host-agnostic so builders can adapt it to ChatGPT-style file mentions, custom GPTs, editor agents, local tools, or other environments.
-
-## Repository structure
-
-- `START-HERE.md`: bootstrap entrypoint
-- `manifests/load-order.md`: intended file loading order
-- `manifests/host-contract.md`: generic host capability contract
-- `prompts/system.md`: main behavioral foundation
-- `prompts/response-contract.md`: response quality contract
-- `skills/`: modular mentoring capabilities
-- `governance/`: long-term quality, safety, and memory controls
-- `market/`: Egypt-specific market context
-- `architecture/`: structure references for builders and integrators
-- `examples/`: realistic case walkthroughs for builders and reviewers
-- `evaluations/`: quality checks and scoring references
-- `CONTRIBUTING.md`: contributor guidance and change rules
-
-## Skill philosophy
-
-Skills are organized in two layers:
-
-- problem-type skills under `skills/core/`
-- domain skills under `skills/domains/`
-
-This lets the agent combine a problem lens such as validation, monetization, prioritization, growth, or execution with a market/domain lens such as real estate, fintech, ecommerce, education, career and work, creator and media, local services, healthcare, or tech.
-
-Across both layers, the agent should stay actor-aware.
-A sector does not imply one default user type, buyer, or decision-maker.
-
-## Design philosophy
-
-This repo is host-agnostic.
-It is meant to preserve the same mentoring logic across different environments and products.
-
-## Fast Evaluation Path
-
-If you want to judge the repo quickly:
+If you want to understand the intended output quality fast:
 
 1. Read `examples/founder-no-revenue.md`
 2. Read `evaluations/dry-runs/founder-no-revenue-dry-run.md`
-3. Check `evaluations/checklist.md`
-4. Check `evaluations/scoring-rubric.md`
+3. Review `evaluations/checklist.md`
+4. Review `evaluations/scoring-rubric.md`
 
-This gives a fast picture of how the system is supposed to think, respond, and review.
+## Core Design Principles
 
-## Product identity
+- Egypt-first by default
+- diagnosis before planning
+- one main priority by default
+- current-phase plans over giant roadmaps
+- execution evidence over intention
+- follow-up that reacts to reality, not wishful thinking
+- actor-aware domain reasoning
+- host-agnostic packaging
 
-The agent is:
+## Current Coverage
 
-- a mentor-style decision and execution guide
-- memory-aware when the host supports memory
-- Egypt-focused by default
-- strict in practical decisions
-- more containing in human and psychological layers
+The prompt pack currently includes:
 
-The agent is not:
+- core skills for diagnosis, validation, monetization, prioritization, growth, execution, and review
+- domain lenses for real estate, fintech, ecommerce, education, career and work, creator and media, local services, healthcare, and tech
+- realistic examples for founders, creators, career switches, service businesses, and weak-execution review loops
+- evaluation assets for checking whether the system is actually behaving like a mentor
 
-- a generic motivation bot
-- a fixed template advisor
-- tied to one interface or provider
-- a substitute for licensed medical, legal, or financial professionals
+## What Is Not Included
 
-## Builder note
+This repository does not currently ship with:
 
-If you are integrating this repo into a product, start from:
+- a bundled runtime
+- a UI
+- a database or persistence layer
+- a memory backend
+- a hosted API
+- a provider-specific integration
+
+That is intentional.
+The goal is to keep the mentoring brain reusable across different environments.
+
+## For Builders
+
+If you want to integrate the repo into a product, start here:
 
 - `START-HERE.md`
 - `manifests/load-order.md`
+- `prompts/system.md`
+- `prompts/response-contract.md`
 - `architecture/agent-spec.md`
 
-If you are extending the repo itself, start from:
+If you want to extend the repo itself, start here:
 
 - `CONTRIBUTING.md`
 - `examples/README.md`
 - `evaluations/README.md`
 
+## Quality Standard
+
+A strong implementation of this repo should consistently produce responses that:
+
+- reduce confusion
+- identify the real bottleneck
+- fit the user's actual constraints
+- avoid spreading effort across many tracks
+- create a reviewable next step
+- become smarter over time through continuity and evidence
+
+## Status
+
+This is an early but serious open-source foundation.
+
+The repo already contains:
+
+- a usable bootstrap structure
+- modular prompt architecture
+- examples
+- evaluations
+- contributor guidance
+
+The next layer of maturity depends on how builders integrate it into real hosts and test it against live cases.
+
+## Contributing
+
+Contributions are welcome, but this repo should stay disciplined.
+
+Before changing behavior, read:
+
+- `CONTRIBUTING.md`
+
+For meaningful changes, prefer updating:
+
+- at least one example
+- at least one evaluation artifact
+
+That keeps the project grounded in real behavior instead of theory alone.
+
 ## License
 
-This repository is licensed under the MIT License.
+MIT License.
 See `LICENSE`.
 
